@@ -5,7 +5,7 @@ Simple platformer game.
 
 - Download this repository
 - Extract files
-- cd path/to/rep/Platform/
+- cd path/to/rep/Platform-master/
 - chmod +x setup
 - ./setup
 
