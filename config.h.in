@@ -1,0 +1,30 @@
+#define versionMajor @PROJECT_VERSION_MAJOR@
+#define versionMinor @PROJECT_VERSION_MINOR@
+
+// starting screen resolution
+
+#define screenSizeX 500
+#define screenSizeY 500
+
+// Box2D stuff
+
+#define defVelocityIterations 6
+#define defPositionIterations 2
+
+// converting MKS system to pixel
+
+#define pixelToMeter(val) (static_cast<float>(val) / 10)
+#define meterToPixel(val) (val * 10)
+
+// SFML stuff
+
+#define ANTIALIASING 8
+
+// Platformer settings
+
+#define defaultVelocityMaxX 10
+#define defaultVelocityMaxY 100
+
+#define playerVelocityMaxX defaultVelocityMaxX
+#define playerVelocityMaxY defaultVelocityMaxY
+#define playerJumpHeight 250
