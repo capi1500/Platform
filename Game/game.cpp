@@ -18,6 +18,9 @@ void Game::main(){
 		}
 		while(window.pollEvent(event)){
 			if(event.type == sf::Event::Closed){
+				for(auto i : object){
+					delete i;
+				}
 				window.close();
 			}
 			if(event.type == sf::Event::KeyPressed and event.key.code == sf::Keyboard::R){

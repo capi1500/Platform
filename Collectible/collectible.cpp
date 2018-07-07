@@ -19,6 +19,7 @@ void Collectible::draw(sf::RenderWindow& window){
 
 void Collectible::collect(){
 	collected = true;
+	playSound("Audio/laser.ogg");
 }
 
 Collectible::Collectible(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : PhysicObject(world, objectRef, properties, texturePath){
