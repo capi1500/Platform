@@ -22,35 +22,43 @@ enum class ObjectType{
 		Player,
 		Collectible,
 		GraphicString,
-		Counter
+		Label,
+		Counter,
+		Button
 };
 
 class Object : public sf::Sprite{
 	protected:
+		sf::RenderWindow& window;
 		sf::Time localTime;
 		sf::Texture texture;
 		std::vector<Sound> sounds;
 		std::map<std::string, unsigned> soundIDs;
 		std::vector<std::string> soundNames;
 		ObjectType objectType;
+		std::string texturePath;
 		std::string name;
 	public:
 		void playSound(std::string name);
 		void pauseSound(std::string name);
 		bool addSound(std::vector<std::string>& list);
 		bool addSound(std::string path);
+		std::vector<std::string>& getSoundList();
 		
 		ObjectType getObjectType();
 		std::string getName();
 		sf::Vector2f getCentre();
+		void setCentre(sf::Vector2f centre);
+		void setCentre(float x, float y);
+		std::string getTexturePath();
 		
-		virtual void draw(sf::RenderWindow& window);
+		virtual void draw();
 		virtual ObjectPassResult pass(sf::Time elapsedTime);
 		virtual void handleEvent(sf::Event event);
 		virtual void handleEvent();
 		
-		Object(std::string texturePath, sf::FloatRect rect, std::string name = "default");
-		Object();
+		Object(sf::RenderWindow& window, std::string texturePath, sf::Vector2f rect, std::string name = "default");
+		~Object();
 };
 
 #endif //PLATFORM_OBJECT_HPP

@@ -8,12 +8,12 @@
 #include <object.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <graphicString.hpp>
+#include <Label/label.hpp>
 
-class Counter : public GraphicString{
+class Counter : public Label{
 	private:
 		unsigned points;
 	public:
-		void draw(sf::RenderWindow& targetWindow, Alphabet& alphabet);
 		void reset();
 		void increment();
 		void updateText();
@@ -21,7 +21,7 @@ class Counter : public GraphicString{
 		unsigned int getPoints() const;
 		void setPoints(int val);
 		
-		Counter(std::string texturePath, sf::FloatRect rect, std::string name = "default");
+		Counter(sf::RenderWindow& window, std::string texturePath, sf::Vector2f rect, Alphabet& alphabet, std::string text = "", std::string name = "default");
 };
 
 #endif //ONEWEEKCHALLANGE_COUNTER_HPP

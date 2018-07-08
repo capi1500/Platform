@@ -31,11 +31,11 @@ void GraphicString::updateTextProperties(){
 	}
 }
 
-void GraphicString::draw(sf::RenderWindow& targetWindow, Alphabet& alphabet){
+void GraphicString::draw(){
 	unsigned h = 0;
 	move(sf::Vector2f(-static_cast<float>(alphabet.getWidth()) * properties.length[h] / 2, -static_cast<float>(alphabet.getHeight()) * properties.lines / 2));
 	for(auto it = text.begin(); it != text.end(); it++){
-		alphabet.drawChar(*it, targetWindow, getPosition());
+		alphabet.drawChar(*it, window, getPosition(), color);
 		if(*it == '\n'){
 			h++;
 			setPosition(sf::Vector2f(getStartCoord().x, getPosition().y));
@@ -65,6 +65,12 @@ void GraphicString::setText(const std::string& text){
 	updateTextProperties();
 }
 
-GraphicString::GraphicString(std::string texturePath, sf::FloatRect rect, std::string name){
+void GraphicString::setTextColor(sf::Color color){
+	this->color = color;
+}
+
+GraphicString::GraphicString(sf::RenderWindow& window, Alphabet& alphabet, sf::Vector2f position, std::string text, std::string texturePath, std::string name) : alphabet(alphabet), Object(window, texturePath, position, name){
+	setText(text);
+	color = sf::Color(255, 255, 255);
 	objectType = ObjectType::GraphicString;
 }

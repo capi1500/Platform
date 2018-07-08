@@ -13,11 +13,13 @@ class Collectible : public PhysicObject{
 		bool collected;
 	public:
 		bool colide(PhysicObject* obj);
-		void collect();
+		void collect(bool quiet = false);
 		
-		void draw(sf::RenderWindow& window);
+		bool isCollected();
 		
-		Collectible(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
+		void draw();
+		
+		Collectible(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
 };
 
 #endif //PLATFORM_COLLECTIBLE_HPP

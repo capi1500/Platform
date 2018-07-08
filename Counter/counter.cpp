@@ -3,11 +3,8 @@
 //
 
 #include <config.h>
+#include <Label/label.hpp>
 #include "counter.hpp"
-
-void Counter::draw(sf::RenderWindow& targetWindow, Alphabet& alphabet){
-	GraphicString::draw(targetWindow, alphabet);
-}
 
 void Counter::updateText(){
 	setText(std::to_string(points));
@@ -33,9 +30,7 @@ unsigned int Counter::getPoints() const{
 }
 
 
-Counter::Counter(std::string texturePath, sf::FloatRect rect, std::string name) : GraphicString(texturePath, rect, name){
-	setPosition(sf::Vector2f(rect.left, rect.top));
-	setStartCoord(getPosition());
+Counter::Counter(sf::RenderWindow& window, std::string texturePath, sf::Vector2f rect, Alphabet& alphabet, std::string text, std::string name) : Label(window, texturePath, rect, alphabet, "0", name){
 	reset();
 	objectType = ObjectType::Counter;
 }

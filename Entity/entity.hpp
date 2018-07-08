@@ -21,7 +21,7 @@ class Entity : public PhysicObject{
 	public:
 		ObjectPassResult pass(sf::Time elapsedTime);
 		
-		Entity(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
+		Entity(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
 };
 
 #endif //PLATFORM_ENTITY_HPP

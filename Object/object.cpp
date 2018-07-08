@@ -9,7 +9,7 @@ ObjectPassResult Object::pass(sf::Time elapsedTime){
 	localTime += elapsedTime;
 }
 
-void Object::draw(sf::RenderWindow& window){
+void Object::draw(){
 	window.draw(*this);
 }
 
@@ -36,7 +36,7 @@ void Object::pauseSound(std::string name){
 bool Object::addSound(std::vector<std::string>& list){
 	unsigned added = 0;
 	for(auto i : list){
-		if(not addSound(list)){
+		if(not addSound(i)){
 			while(added--){
 				soundIDs.erase(soundNames[soundNames.size() - 1]);
 				sounds.pop_back();
@@ -61,26 +61,45 @@ bool Object::addSound(std::string path){
 	return true;
 }
 
+std::vector<std::string>& Object::getSoundList(){
+	return soundNames;
+}
+
 std::string Object::getName(){
 	return name;
 }
 
 sf::Vector2f Object::getCentre(){
-	return getPosition()/* - sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2)*/;
+	return getPosition() + sf::Vector2f(getGlobalBounds().width / 2, getGlobalBounds().height / 2);
+}
+
+void Object::setCentre(sf::Vector2f centre){
+	setPosition(centre.x - getGlobalBounds().width / 2, centre.y - getGlobalBounds().height / 2);
+}
+
+void Object::setCentre(float x, float y){
+	setCentre(sf::Vector2f(x, y));
 }
 
 ObjectType Object::getObjectType(){
 	return objectType;
 }
 
-Object::Object(std::string texturePath, sf::FloatRect rect, std::string name){
+std::string Object::getTexturePath(){
+	return texturePath;
+}
+
+Object::Object(sf::RenderWindow& window, std::string texturePath, sf::Vector2f rect, std::string name) : window(window){
+	this->texturePath = texturePath;
 	texture.loadFromFile(texturePath);
 	setTexture(texture);
-	setPosition(rect.left, rect.top);
+	setPosition(rect);
 	this->name = name;
 	objectType = ObjectType::Object;
 }
 
-Object::Object(){
-	objectType = ObjectType::Object;
+Object::~Object(){
+	sounds.erase(sounds.begin(), sounds.end());
+	soundIDs.erase(soundIDs.begin(), soundIDs.end());
+	soundNames.erase(soundNames.begin(), soundNames.end());
 }

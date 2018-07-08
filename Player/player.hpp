@@ -14,8 +14,10 @@ class Player : public Entity{
 		ObjectPassResult pass(sf::Time elapsedTime);
 		void handleEvent();
 		unsigned getCollectible(std::string name);
+		std::map<std::string, unsigned>& getCollected();
+		void setCollected(std::map<std::string, unsigned>& collected);
 		
-		Player(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
+		Player(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
 };
 
 #endif //PLATFORM_PLAYER_HPP

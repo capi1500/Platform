@@ -28,7 +28,12 @@ include_directories(Object
 	GroundObject
 	Player
 	Collectible
-	Counter)
+	Counter
+	Label
+	Button
+	EventHandler
+	Event
+	Menu)
 
 add_executable(${EXECUTABLE_NAME}
 	main.cpp
@@ -39,14 +44,16 @@ add_executable(${EXECUTABLE_NAME}
 	AnimatedSprite/Animation.cpp AnimatedSprite/Animation.hpp
 	AnimatedSprite/AnimatedSprite.cpp AnimatedSprite/AnimatedSprite.hpp
 	GraphicString/graphicString.cpp GraphicString/graphicString.hpp
-	TerrainObject/terrainObject.cpp TerrainObject/terrainObject.hpp
 	PhysicObject/physicObject.cpp PhysicObject/physicObject.hpp
 	Loader/loader.cpp Loader/loader.hpp
 	Entity/entity.cpp Entity/entity.hpp
 	GroundObject/groundObject.cpp GroundObject/groundObject.hpp
 	Player/player.cpp Player/player.hpp
 	Collectible/collectible.cpp Collectible/collectible.hpp
-	Counter/counter.cpp Counter/counter.hpp)
+	Counter/counter.cpp Counter/counter.hpp
+	Button/button.cpp Button/button.hpp
+	Label/label.cpp Label/label.hpp
+	Menu/menu.cpp Menu/menu.hpp)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 # Detect and add SFML

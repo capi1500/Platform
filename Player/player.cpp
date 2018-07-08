@@ -36,6 +36,7 @@ void Player::handleEvent(){
 		if(onGround() and localTime >= sf::milliseconds(10)){
 			localTime = sf::milliseconds(0);
 			addVelocity(sf::Vector2f(0, -playerJumpHeight));
+			playSound("Audio/jump.ogg");
 		}
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
@@ -50,6 +51,14 @@ unsigned Player::getCollectible(std::string name){
 	return collected[name];
 }
 
-Player::Player(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : Entity(world, objectRef, properties, texturePath){
+std::map<std::string, unsigned>& Player::getCollected(){
+	return collected;
+}
+
+void Player::setCollected(std::map<std::string, unsigned>& collected){
+	this->collected = collected;
+}
+
+Player::Player(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : Entity(window, world, objectRef, properties, texturePath){
 	objectType = ObjectType::Player;
 }

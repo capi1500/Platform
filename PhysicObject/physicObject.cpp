@@ -9,13 +9,15 @@
 #include <config.h>
 #include <Box2D/Collision/Shapes/b2CircleShape.h>
 
-PhysicObjectProperties::PhysicObjectProperties(sf::FloatRect rect, bool dynamic, float density, float friction, PhysicObjectType type, bool isEntity){
+PhysicObjectProperties::PhysicObjectProperties(sf::FloatRect rect, sf::Vector2f velocity, float angle, bool dynamic, float density, float friction, PhysicObjectType type, bool isEntity){
 	this->rect = rect;
 	this->dynamic = dynamic;
 	this->density = density;
 	this->friction = friction;
 	this->type = type;
 	this->isEntity = isEntity;
+	this->angle = angle;
+	this->velocity = velocity;
 }
 
 ObjectPassResult PhysicObject::pass(sf::Time elapsedTime){
@@ -33,9 +35,18 @@ b2Body* PhysicObject::getBody(){
 	return body;
 }
 
-PhysicObject::PhysicObject(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : object(objectRef),
-		Object(texturePath, properties.rect, properties.name),
-		properties(properties){
+PhysicObjectProperties PhysicObject::getProperties(){
+	properties.angle = body->GetAngle() * 180 / b2_pi;
+	properties.rect.left = getPosition().x - getGlobalBounds().width / 2;
+	properties.rect.top = getPosition().y - getGlobalBounds().height / 2;
+	properties.velocity = sf::Vector2f(meterToPixel(body->GetLinearVelocity().x), meterToPixel(body->GetLinearVelocity().y));
+	return properties;
+}
+
+PhysicObject::PhysicObject(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : object(objectRef),
+		Object(window, texturePath, sf::Vector2f(properties.rect.left, properties.rect.top), properties.name),
+		properties(properties),
+		world(world){
 	objectType = ObjectType::PhysicalObject;
 	// Creating Box2D object to simulate physics
 	b2BodyDef bodyDef;
@@ -50,6 +61,8 @@ PhysicObject::PhysicObject(b2World& world, std::vector<PhysicObject*>& objectRef
 		bodyDef.fixedRotation = true;
 	}
 	bodyDef.position.Set(pixelToMeter(properties.rect.left + properties.rect.width / 2), pixelToMeter(properties.rect.top + properties.rect.height / 2));
+	bodyDef.angle = properties.angle * b2_pi / 180;
+	bodyDef.linearVelocity = b2Vec2(pixelToMeter(properties.velocity.x), pixelToMeter(properties.velocity.y));
 	body = world.CreateBody(&bodyDef);
 	b2FixtureDef fixtureDef;
 	b2CircleShape circleShape;
@@ -70,4 +83,9 @@ PhysicObject::PhysicObject(b2World& world, std::vector<PhysicObject*>& objectRef
 	body->CreateFixture(&fixtureDef);
 	// SFML stuff
 	setOrigin(sf::Vector2f(properties.rect.width / 2, properties.rect.height / 2));
+}
+
+PhysicObject::~PhysicObject(){
+	body->DestroyFixture(body->GetFixtureList());
+	world.DestroyBody(body);
 }

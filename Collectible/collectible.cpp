@@ -4,6 +4,10 @@
 
 #include "collectible.hpp"
 
+bool Collectible::isCollected(){
+	return collected;
+}
+
 bool Collectible::colide(PhysicObject* obj){
 	sf::FloatRect o1 = obj->getGlobalBounds(), o2 = getGlobalBounds();
 	if(not collected and o1.top + o1.height > o2.top and o1.top < o2.top + o2.height and o1.left + o1.width > o2.left and o1.left < o2.left + o2.width )
@@ -11,18 +15,20 @@ bool Collectible::colide(PhysicObject* obj){
 	return false;
 }
 
-void Collectible::draw(sf::RenderWindow& window){
+void Collectible::draw(){
 	if(not collected){
-		Object::draw(window);
+		Object::draw();
 	}
 }
 
-void Collectible::collect(){
+void Collectible::collect(bool quiet){
 	collected = true;
-	playSound("Audio/laser.ogg");
+	if(not quiet){
+		playSound("Audio/laser.ogg");
+	}
 }
 
-Collectible::Collectible(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : PhysicObject(world, objectRef, properties, texturePath){
+Collectible::Collectible(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : PhysicObject(window, world, objectRef, properties, texturePath){
 	objectType = ObjectType::Collectible;
 	collected = false;
 }

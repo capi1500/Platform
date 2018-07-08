@@ -23,7 +23,7 @@
 // Platformer settings
 
 #define defaultVelocityMaxX 10
-#define defaultVelocityMaxY 100
+#define defaultVelocityMaxY 10
 
 #define playerVelocityMaxX defaultVelocityMaxX
 #define playerVelocityMaxY defaultVelocityMaxY

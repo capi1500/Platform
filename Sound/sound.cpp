@@ -11,7 +11,6 @@ void Sound::pause(){
 void Sound::play(){
 	sound.setBuffer(buffer);
 	sound.play();
-	printf("played\n");
 }
 
 void Sound::setVolume(float volume){

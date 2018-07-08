@@ -10,6 +10,8 @@
 #include <PhysicObject/physicObject.hpp>
 #include <Loader/loader.hpp>
 #include <Counter/counter.hpp>
+#include <Button/button.hpp>
+#include <Menu/menu.hpp>
 #include "Box2D/Box2D.h"
 
 enum class GameState{
@@ -32,11 +34,23 @@ class Game{
 		sf::Time elapsedTime;
 		sf::View view;
 		
-		unsigned currentLevel;
 		std::vector<PhysicObject*> object;
 		Counter pointCounter;
+		std::vector<Menu> menu;
+		
+		void play();
+		void pause();
+		void mainMenu();
+		
+		Menu* getMenu(std::string name);
+		PhysicObject* getObject(std::string name);
 	public:
 		void main();
+		
+		void playButtonClicked();
+		void resumeButtonClicked();
+		void mainMenuButtonClicked();
+		void exitButtonClicked();
 		
 		Game();
 };

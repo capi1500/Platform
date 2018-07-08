@@ -41,6 +41,7 @@ Collectible{
     type kinematic
     name Point
     texture Textures/yellowBox.png
+    sound Audio/laser.ogg
 }
 Ground{
     position 500 130
@@ -110,13 +111,41 @@ Player{
     shape circle
     name Player
     texture Textures/blueBox.png
+    sound Audio/jump.ogg
 }
 Object{
     position 220 90
     size 20 20
-    friction 0.3
+    friction 5
     density 1
     shape box
     type dynamic
     texture Textures/redBox.png
 }
+Object{
+    position 250 90
+    size 20 20
+    friction 5
+    density 1
+    shape box
+    type dynamic
+    texture Textures/redBox.png
+}
+Object{
+     position 250 70
+     size 20 20
+     friction 5
+     density 1
+     shape box
+     type dynamic
+     texture Textures/redBox.png
+ }
+ Object{
+     position 265 115
+     size 20 20
+     friction 5
+     density 1
+     shape box
+     type dynamic
+     texture Textures/redBox.png
+ }

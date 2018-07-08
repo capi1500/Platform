@@ -21,7 +21,7 @@ bool Entity::onGround(){
 			if(contact->other == obj->getBody() and contact->contact->IsTouching()){
 				if(obj->getObjectType() == ObjectType::Ground or obj->getObjectType() == ObjectType::PhysicalObject){
 					sf::FloatRect o1 = getGlobalBounds(), o2 = obj->getGlobalBounds();
-					if(o1.top + o1.height <= o2.top and o1.left + o1.width > o2.left and o1.left < o2.left + o2.width){
+					if(o1.top + o1.height - 1 <= o2.top and o1.left + o1.width > o2.left and o1.left < o2.left + o2.width){
 						return true;
 					}
 				}
@@ -31,6 +31,6 @@ bool Entity::onGround(){
 	return false;
 }
 
-Entity::Entity(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : PhysicObject(world, objectRef, properties, texturePath){
+Entity::Entity(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath) : PhysicObject(window, world, objectRef, properties, texturePath){
 	objectType = ObjectType::Entity;
 }

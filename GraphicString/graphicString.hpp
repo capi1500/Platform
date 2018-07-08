@@ -16,10 +16,12 @@ struct StringProperties{
 };
 
 class GraphicString : public Object{
-	private:
+	protected:
 		sf::Vector2f startCoord;
 		std::string text;
 		StringProperties properties;
+		Alphabet& alphabet;
+		sf::Color color;
 		
 		void updateTextProperties();
 	public:
@@ -27,10 +29,11 @@ class GraphicString : public Object{
 		void setStartCoord(const sf::Vector2f& startCoord);
 		const std::string& getText() const;
 		void setText(const std::string& text);
+		void setTextColor(sf::Color color);
 		
-		void draw(sf::RenderWindow& targetWindow, Alphabet& alphabet);
+		void draw();
 		
-		GraphicString(std::string texturePath, sf::FloatRect rect, std::string name = "default");
+		GraphicString(sf::RenderWindow& window, Alphabet& alphabet, sf::Vector2f position, std::string text, std::string texturePath, std::string name = "default");
 };
 
 #endif //ONEWEEKCHALLANGE_GRAPHICSTRING_HPP

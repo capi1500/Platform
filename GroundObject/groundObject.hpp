@@ -9,7 +9,7 @@
 
 class GroundObject : public PhysicObject{
 	public:
-		GroundObject(b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
+		GroundObject(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
 };
 
 #endif //PLATFORM_GROUNDOBJECT_HPP

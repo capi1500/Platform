@@ -5,7 +5,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "alphabet.hpp"
 
-void Alphabet::drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f coord){
+void Alphabet::drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f coord, sf::Color color){
 	if(val == ' ' or val == '\t' or val == '\n')
 		return;
 	sf::Texture texture;
@@ -13,6 +13,7 @@ void Alphabet::drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f c
 	sf::Sprite sprite;
 	sprite.setTexture(texture);
 	sprite.setPosition(coord);
+	sprite.setColor(color);
 	renderWindow.draw(sprite);
 }
 
