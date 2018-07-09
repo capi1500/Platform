@@ -11,6 +11,7 @@
 enum class ObjectPassResult{
 		OK,
 		Error,
+		NewLevel,
 		Unexpected
 };
 
@@ -25,7 +26,8 @@ enum class ObjectType{
 		Label,
 		Counter,
 		Button,
-		NPC
+		NPC,
+		Portal
 };
 
 class Object : public sf::Sprite{

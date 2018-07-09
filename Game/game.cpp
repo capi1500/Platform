@@ -7,6 +7,7 @@
 #include <config.h>
 #include <iostream>
 #include <Player/player.hpp>
+#include <Portal/portal.hpp>
 #include "game.hpp"
 
 void Game::play(){
@@ -43,7 +44,21 @@ void Game::play(){
 	world.Step(elapsedTime.asSeconds(), defVelocityIterations, defPositionIterations);
 	world.ClearForces();
 	for(auto i : object){
-		i->pass(elapsedTime);
+		if(i->pass(elapsedTime) == ObjectPassResult::NewLevel){
+			std::map<std::string, unsigned> eq;
+			for(auto j : object){
+				if(j->getObjectType() == ObjectType::Player){
+					eq = dynamic_cast<Player*>(j)->getCollected();
+				}
+			}
+			loader.load(dynamic_cast<Portal*>(i)->getTarget());
+			for(auto j : object){
+				if(j->getObjectType() == ObjectType::Player){
+					dynamic_cast<Player*>(j)->setCollected(eq);
+				}
+			}
+			return;
+		}
 		if(i->getObjectType() == ObjectType::Player){
 			pointCounter.setPoints(dynamic_cast<Player*>(i)->getCollectible("Money"));
 			pointCounter.setCentre(i->getCentre().x - window.getSize().x / 2 + alphabet.getWidth() * lettersScaling * pointCounter.getScale().x * (pointCounter.getPoints() == 0 ? 1 : static_cast<int>(1 + log10(pointCounter.getPoints()))) / 2, i->getCentre().y - window.getSize().y / 2 + 30);

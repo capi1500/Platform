@@ -100,6 +100,13 @@ Ground{
     shape box
     texture Textures/redBox.png
 }
+Portal{
+    position 720 110
+    size 20 20
+    shape circle
+    texture Textures/lightBlueBox.png
+    target Saves/init1.sv
+}
 Player{
     position 125 132
     size 19 19

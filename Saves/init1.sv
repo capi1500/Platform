@@ -43,9 +43,6 @@ Player{
     name Player
     texture Textures/blueBox.png
     sound Audio/jump.ogg
-    EQ{
-        Money 100
-    }
 }
 Collectible{
     position 220 60

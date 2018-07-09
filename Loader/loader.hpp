@@ -55,6 +55,7 @@ class Loader{
 		void loadObject();
 		void loadCollectible();
 		void loadNPC();
+		void loadPortal();
 		
 		void clear();
 	public:

@@ -10,6 +10,7 @@
 #include <Player/player.hpp>
 #include <Collectible/collectible.hpp>
 #include <NPC/NPC.hpp>
+#include <Portal/portal.hpp>
 
 void Loader::loadProperties(){
 	
@@ -219,6 +220,9 @@ void Loader::saveObject(PhysicObject* obj){
 		case ObjectType::NPC:
 			file << "NPC{\n";
 			break;
+		case ObjectType::Portal:
+			file << "Portal{\n";
+			break;
 		default:
 			file << "Object{\n";
 			break;
@@ -277,6 +281,9 @@ void Loader::saveObject(PhysicObject* obj){
 		file << "\ttarget " << dynamic_cast<NPC*>(obj)->getQuestTarget() << "\n";
 		file << "\trewardAmmount " << dynamic_cast<NPC*>(obj)->getRewardAmmount() << "\n";
 		file << "\treward " << dynamic_cast<NPC*>(obj)->getReward() << "\n";
+	}
+	if(obj->getObjectType() == ObjectType::Portal){
+		file << "\ttarget " << dynamic_cast<Portal*>(obj)->getTarget() << "\n";
 	}
 	file << "}\n";
 }
@@ -340,6 +347,13 @@ void Loader::loadNPC(){
 	dynamic_cast<NPC*>(object[object.size() - 1])->setReward(reward);
 }
 
+void Loader::loadPortal(){
+	loadProperties();
+	object.push_back(new Portal(window, world, object, properties, texturePath));
+	loadSounds();
+	dynamic_cast<Portal*>(object[object.size() - 1])->setTarget(questTarget);
+}
+
 bool Loader::load(std::string path){
 	// clean everything
 	for(auto* i : object){
@@ -376,6 +390,9 @@ bool Loader::load(std::string path){
 		}
 		else if(text == "NPC{"){
 			loadNPC();
+		}
+		else if(text == "Portal{"){
+			loadPortal();
 		}
 		else if(text == "time"){
 			file >> number;
