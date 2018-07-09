@@ -3,9 +3,10 @@
 //
 
 #include <SFML/Graphics/Sprite.hpp>
+#include <config.h>
 #include "alphabet.hpp"
 
-void Alphabet::drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f coord, sf::Color color){
+void Alphabet::drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f coord, sf::Vector2f localScale, sf::Color color){
 	if(val == ' ' or val == '\t' or val == '\n')
 		return;
 	sf::Texture texture;
@@ -14,6 +15,7 @@ void Alphabet::drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f c
 	sprite.setTexture(texture);
 	sprite.setPosition(coord);
 	sprite.setColor(color);
+	sprite.setScale(lettersScaling * localScale.x, lettersScaling * localScale.y);
 	renderWindow.draw(sprite);
 }
 

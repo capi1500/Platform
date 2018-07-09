@@ -19,7 +19,7 @@ class Alphabet{
 		
 		void init();
 	public:
-		void drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f coord, sf::Color color = sf::Color(255, 255, 255));
+		void drawChar(char val, sf::RenderWindow& renderWindow, sf::Vector2f coord, sf::Vector2f localScale, sf::Color color = sf::Color(255, 255, 255));
 		unsigned int getHeight() const;
 		unsigned int getWidth() const;
 		
