@@ -25,6 +25,7 @@ void Game::play(){
 				state = GameState::Pause;
 				view.setCenter(window.getSize().x / 2, window.getSize().y / 2);
 				window.setView(view);
+				window.setMouseCursorVisible(true);
 				return;
 			}
 		}
@@ -89,6 +90,7 @@ void Game::pause(){
 				if(not loader.load("Saves/temp.sv")){
 					std::cout << loader.log.error << "\n";
 				}
+				window.setMouseCursorVisible(false);
 				clock.restart();
 				return;
 			}
@@ -176,6 +178,7 @@ void Game::playButtonClicked(){
 		std::cout << loader.log.error << "\n";
 	}
 	clock.restart();
+	window.setMouseCursorVisible(false);
 }
 
 void Game::resumeButtonClicked(){
@@ -184,12 +187,14 @@ void Game::resumeButtonClicked(){
 		std::cout << loader.log.error << "\n";
 	}
 	clock.restart();
+	window.setMouseCursorVisible(false);
 }
 
 void Game::mainMenuButtonClicked(){
 	state = GameState::MainMenu;
 	view.setCenter(window.getSize().x / 2, window.getSize().y / 2);
 	window.setView(view);
+	window.setMouseCursorVisible(true);
 }
 
 void Game::exitButtonClicked(){
