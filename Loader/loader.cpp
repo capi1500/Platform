@@ -9,6 +9,7 @@
 #include <GroundObject/groundObject.hpp>
 #include <Player/player.hpp>
 #include <Collectible/collectible.hpp>
+#include <NPC/NPC.hpp>
 
 void Loader::loadProperties(){
 	
@@ -19,9 +20,19 @@ void Loader::loadProperties(){
 	properties.isEntity = false;
 	properties.kinematic = false;
 	properties.name = "default";
+	properties.angle = 0;
 	collected = false;
 	sounds.erase(sounds.begin(), sounds.end());
 	eq.erase(eq.begin(), eq.end());
+	talks.erase(talks.begin(), talks.end());
+	playerNearby = false;
+	playerMovedAway = true;
+	questStarted = false;
+	questDone = false;
+	afterQuest = false;
+	rewardGiven = false;
+	nowTalking = "nothing";
+	ammount = 1;
 	
 	file >> text;
 	while(text != "}"){
@@ -97,6 +108,89 @@ void Loader::loadProperties(){
 				file >> text;
 			}
 		}
+		else if(text == "talks{"){
+			file >> text;
+			while(text != "}"){
+				char c;
+				c = file.get();
+				while(c != ';'){
+					text2 += c;
+					c = file.get();
+				}
+				talks[text] = text2.substr(1, text2.size() - 1);
+				text2 = "";
+				file >> text;
+			}
+		}
+		else if(text == "playerNearby"){
+			file >> text;
+			if(text == "true"){
+				playerNearby = true;
+			}
+			else{
+				playerNearby = false;
+			}
+		}
+		else if(text == "playerMovedAway"){
+			file >> text;
+			if(text == "true"){
+				playerMovedAway = true;
+			}
+			else{
+				playerMovedAway = false;
+			}
+		}
+		else if(text == "questStarted"){
+			file >> text;
+			if(text == "true"){
+				questStarted = true;
+			}
+			else{
+				questStarted = false;
+			}
+		}
+		else if(text == "questDone"){
+			file >> text;
+			if(text == "true"){
+				questDone = true;
+			}
+			else{
+				questDone = false;
+			}
+		}
+		else if(text == "afterQuest"){
+			file >> text;
+			if(text == "true"){
+				afterQuest = true;
+			}
+			else{
+				afterQuest = false;
+			}
+		}
+		else if(text == "rewardGiven"){
+			file >> text;
+			if(text == "true"){
+				rewardGiven = true;
+			}
+			else{
+				rewardGiven = false;
+			}
+		}
+		else if(text == "nowTalking"){
+			file >> nowTalking;
+		}
+		else if(text == "ammount"){
+			file >> ammount;
+		}
+		else if(text == "target"){
+			file >> questTarget;
+		}
+		else if(text == "rewardAmmount"){
+			file >> rewardAmmount;
+		}
+		else if(text == "reward"){
+			file >> reward;
+		}
 		file >> text;
 	}
 }
@@ -122,6 +216,9 @@ void Loader::saveObject(PhysicObject* obj){
 		case ObjectType::Collectible:
 			file << "Collectible{\n";
 			break;
+		case ObjectType::NPC:
+			file << "NPC{\n";
+			break;
 		default:
 			file << "Object{\n";
 			break;
@@ -143,6 +240,7 @@ void Loader::saveObject(PhysicObject* obj){
 	else if(obj->getProperties().type == PhysicObjectType::Circle){
 		file << "\tshape circle\n";
 	}
+	file << "\tname " << obj->getName() << "\n";
 	file << "\tposition " << obj->getProperties().rect.left << " " << obj->getProperties().rect.top << "\n";
 	file << "\tsize " << obj->getProperties().rect.width << " " << obj->getProperties().rect.height << "\n";
 	file << "\tvelocity " << obj->getProperties().velocity.x << " " << obj->getProperties().velocity.y << "\n";
@@ -153,6 +251,7 @@ void Loader::saveObject(PhysicObject* obj){
 	file << "\ttexture " << obj->getTexturePath() << "\n";
 	if(obj->getObjectType() == ObjectType::Collectible){
 		file << "\tcollected " << (dynamic_cast<Collectible*>(obj)->isCollected() ? "true\n" : "false\n");
+		file << "\tammount " << dynamic_cast<Collectible*>(obj)->getAmmount() << "\n";
 	}
 	if(obj->getObjectType() == ObjectType::Player){
 		file << "\tEQ{\n";
@@ -160,6 +259,24 @@ void Loader::saveObject(PhysicObject* obj){
 			file << "\t\t" << i.first << " " << i.second << "\n";
 		}
 		file << "\t}\n";
+	}
+	if(obj->getObjectType() == ObjectType::NPC){
+		file << "\ttalks{\n";
+		for(auto i : dynamic_cast<NPC*>(obj)->getTalks()){
+			file << "\t\t" << i.first << " " << i.second << ";\n";
+		}
+		file << "\t}\n";
+		file << "\tplayerNearby " << (dynamic_cast<NPC*>(obj)->isPlayerNearby() ? "true\n" : "false\n");
+		file << "\tplayerMovedAway " << (dynamic_cast<NPC*>(obj)->isPlayerMovedAway() ? "true\n" : "false\n");
+		file << "\tquestStarted " << (dynamic_cast<NPC*>(obj)->isQuestStarted() ? "true\n" : "false\n");
+		file << "\tquestDone " << (dynamic_cast<NPC*>(obj)->isQuestDone() ? "true\n" : "false\n");
+		file << "\tafterQuest " << (dynamic_cast<NPC*>(obj)->isAfterQuest() ? "true\n" : "false\n");
+		file << "\trewardGiven " << (dynamic_cast<NPC*>(obj)->isRewardGiven() ? "true\n" : "false\n");
+		file << "\tnowTalking " << dynamic_cast<NPC*>(obj)->getNowTalking() << "\n";
+		file << "\tammount " << dynamic_cast<NPC*>(obj)->getAmmount() << "\n";
+		file << "\ttarget " << dynamic_cast<NPC*>(obj)->getQuestTarget() << "\n";
+		file << "\trewardAmmount " << dynamic_cast<NPC*>(obj)->getRewardAmmount() << "\n";
+		file << "\treward " << dynamic_cast<NPC*>(obj)->getReward() << "\n";
 	}
 	file << "}\n";
 }
@@ -202,6 +319,25 @@ void Loader::loadCollectible(){
 	if(collected){
 		dynamic_cast<Collectible*>(object[object.size() - 1])->collect(true);
 	}
+	dynamic_cast<Collectible*>(object[object.size() - 1])->setAmmount(ammount);
+}
+
+void Loader::loadNPC(){
+	loadProperties();
+	object.push_back(new NPC(window, world, object, properties, alphabet, texturePath));
+	loadSounds();
+	dynamic_cast<NPC*>(object[object.size() - 1])->setTalks(talks);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setPlayerNearby(playerNearby);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setPlayerMovedAway(playerMovedAway);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setQuestStarted(questStarted);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setQuestDone(questDone);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setAfterQuest(afterQuest);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setRewardGiven(rewardGiven);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setNowTalking(nowTalking);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setAmmount(ammount);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setQuestTarget(questTarget);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setRewardAmmount(rewardAmmount);
+	dynamic_cast<NPC*>(object[object.size() - 1])->setReward(reward);
 }
 
 bool Loader::load(std::string path){
@@ -238,6 +374,9 @@ bool Loader::load(std::string path){
 		else if(text == "Collectible{"){
 			loadCollectible();
 		}
+		else if(text == "NPC{"){
+			loadNPC();
+		}
 		else if(text == "time"){
 			file >> number;
 			time = sf::milliseconds(number);
@@ -269,8 +408,10 @@ void Loader::clear(){
 	eq.erase(eq.begin(), eq.end());
 }
 
-Loader::Loader(sf::RenderWindow& window, b2World& worldRef, std::vector<PhysicObject*>& objectRef, sf::Time& time) : window(window), world(worldRef),
+Loader::Loader(sf::RenderWindow& window, b2World& worldRef, std::vector<PhysicObject*>& objectRef, sf::Time& time, Alphabet& alphabet) : window(window),
+		world(worldRef),
 		object(objectRef),
 		properties(sf::FloatRect(0, 0, 0, 0)),
-		time(time){
+		time(time),
+		alphabet(alphabet){
 }

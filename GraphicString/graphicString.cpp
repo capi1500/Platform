@@ -5,6 +5,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <alphabet.hpp>
+#include <config.h>
 #include "graphicString.hpp"
 
 void StringProperties::reset(){
@@ -33,16 +34,17 @@ void GraphicString::updateTextProperties(){
 
 void GraphicString::draw(){
 	unsigned h = 0;
-	move(sf::Vector2f(-static_cast<float>(alphabet.getWidth()) * properties.length[h] / 2, -static_cast<float>(alphabet.getHeight()) * properties.lines / 2));
+	startCoord = getPosition();
+	move(sf::Vector2f(-static_cast<float>(alphabet.getWidth()) * lettersScaling * getScale().x * properties.length[h] / 2, -static_cast<float>(alphabet.getHeight()) * lettersScaling * getScale().y * properties.lines / 2));
 	for(auto it = text.begin(); it != text.end(); it++){
-		alphabet.drawChar(*it, window, getPosition(), color);
+		alphabet.drawChar(*it, window, getPosition(), getScale(), color);
 		if(*it == '\n'){
 			h++;
 			setPosition(sf::Vector2f(getStartCoord().x, getPosition().y));
-			move(sf::Vector2f(-static_cast<float>(alphabet.getWidth()) * properties.length[h] / 2, alphabet.getHeight()));
+			move(sf::Vector2f(-static_cast<float>(alphabet.getWidth()) * lettersScaling * getScale().x * properties.length[h] / 2, alphabet.getHeight() * lettersScaling * getScale().y));
 		}
 		else{
-			move(sf::Vector2f(alphabet.getWidth(), 0));
+			move(sf::Vector2f(alphabet.getWidth() * lettersScaling * getScale().x, 0));
 		}
 	}
 	setPosition(getStartCoord());

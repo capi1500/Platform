@@ -91,8 +91,10 @@ std::string Object::getTexturePath(){
 
 Object::Object(sf::RenderWindow& window, std::string texturePath, sf::Vector2f rect, std::string name) : window(window){
 	this->texturePath = texturePath;
-	texture.loadFromFile(texturePath);
-	setTexture(texture);
+	if(texturePath != ""){
+		texture.loadFromFile(texturePath);
+		setTexture(texture);
+	}
 	setPosition(rect);
 	this->name = name;
 	objectType = ObjectType::Object;

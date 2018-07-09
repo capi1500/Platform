@@ -22,6 +22,8 @@
 
 // Platformer settings
 
+#define lettersScaling 2.f
+
 #define defaultVelocityMaxX 10
 #define defaultVelocityMaxY 10
 

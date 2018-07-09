@@ -5,6 +5,12 @@ Ground{
     texture Textures/redBox.png
 }
 Ground{
+    position 50 130
+    size 20 20
+    shape box
+    texture Textures/redBox.png
+}
+Ground{
     position 210 130
     size 20 20
     shape box
@@ -33,15 +39,6 @@ Ground{
     size 150 10
     shape box
     texture Textures/ground.png
-}
-Collectible{
-    position 175 95
-    size 10 10
-    shape box
-    type kinematic
-    name Point
-    texture Textures/yellowBox.png
-    sound Audio/laser.ogg
 }
 Ground{
     position 500 130
@@ -104,7 +101,7 @@ Ground{
     texture Textures/redBox.png
 }
 Player{
-    position 125 128
+    position 125 132
     size 19 19
     friction 0
     density 1
@@ -113,39 +110,72 @@ Player{
     texture Textures/blueBox.png
     sound Audio/jump.ogg
 }
-Object{
-    position 220 90
+NPC{
+    position 300 130
     size 20 20
-    friction 5
-    density 1
-    shape box
-    type dynamic
-    texture Textures/redBox.png
+    shape circle
+    name Antoni
+    texture Textures/blueBox.png
+    talks{
+        hello hello;
+        quest1 Can you collect 5 carrots;
+        quest2 so I can make carrot brew;
+        quest3 I'll reward you with 100 gold coins;
+        bye goodbye;
+        quest_in_progress1 Nah, you don't have enough;
+        quest_in_progress2 Bring me 5 carrots;
+        quest_finished1 Very well, now I'm going to prepere my meal;
+        quest_finished2 Oh and here are your coins;
+        after_quest1 Ohh thank you for help;
+        after_quest2 I will remember your deed;
+    }
+    target Point
+    ammount 5
+    reward Money
+    rewardAmmount 100
 }
-Object{
-    position 250 90
-    size 20 20
-    friction 5
-    density 1
+Collectible{
+    position 350 85
+    size 10 10
     shape box
-    type dynamic
-    texture Textures/redBox.png
+    type kinematic
+    name Point
+    texture Textures/yellowBox.png
+    sound Audio/laser.ogg
 }
-Object{
-     position 250 70
-     size 20 20
-     friction 5
-     density 1
-     shape box
-     type dynamic
-     texture Textures/redBox.png
- }
- Object{
-     position 265 115
-     size 20 20
-     friction 5
-     density 1
-     shape box
-     type dynamic
-     texture Textures/redBox.png
- }
+Collectible{
+    position 290 95
+    size 10 10
+    shape box
+    type kinematic
+    name Point
+    texture Textures/yellowBox.png
+    sound Audio/laser.ogg
+}
+Collectible{
+    position 175 95
+    size 10 10
+    shape box
+    type kinematic
+    name Point
+    texture Textures/yellowBox.png
+    sound Audio/laser.ogg
+}
+Collectible{
+    position 450 95
+    size 10 10
+    shape box
+    type kinematic
+    name Point
+    texture Textures/yellowBox.png
+    sound Audio/laser.ogg
+}
+Collectible{
+    position 600 95
+    size 10 10
+    shape box
+    type kinematic
+    name Point
+    texture Textures/yellowBox.png
+    sound Audio/laser.ogg
+}

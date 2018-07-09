@@ -32,3 +32,11 @@ Collectible::Collectible(sf::RenderWindow& window, b2World& world, std::vector<P
 	objectType = ObjectType::Collectible;
 	collected = false;
 }
+
+int Collectible::getAmmount() const{
+	return ammount;
+}
+
+void Collectible::setAmmount(int ammount){
+	Collectible::ammount = ammount;
+}

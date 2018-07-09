@@ -16,6 +16,8 @@ class Player : public Entity{
 		unsigned getCollectible(std::string name);
 		std::map<std::string, unsigned>& getCollected();
 		void setCollected(std::map<std::string, unsigned>& collected);
+		void addCollectible(std::string name, int val);
+		void jump();
 		
 		Player(sf::RenderWindow& window, b2World& world, std::vector<PhysicObject*>& objectRef, PhysicObjectProperties properties, std::string texturePath = "");
 };

@@ -33,7 +33,8 @@ include_directories(Object
 	Button
 	EventHandler
 	Event
-	Menu)
+	Menu
+	NPC)
 
 add_executable(${EXECUTABLE_NAME}
 	main.cpp
@@ -53,7 +54,7 @@ add_executable(${EXECUTABLE_NAME}
 	Counter/counter.cpp Counter/counter.hpp
 	Button/button.cpp Button/button.hpp
 	Label/label.cpp Label/label.hpp
-	Menu/menu.cpp Menu/menu.hpp)
+	Menu/menu.cpp Menu/menu.hpp NPC/NPC.cpp NPC/NPC.hpp)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 # Detect and add SFML

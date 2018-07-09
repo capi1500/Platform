@@ -24,7 +24,8 @@ enum class ObjectType{
 		GraphicString,
 		Label,
 		Counter,
-		Button
+		Button,
+		NPC
 };
 
 class Object : public sf::Sprite{

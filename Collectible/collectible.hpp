@@ -11,6 +11,12 @@
 class Collectible : public PhysicObject{
 	protected:
 		bool collected;
+		int ammount;
+	public:
+		int getAmmount() const;
+		
+		void setAmmount(int ammount);
+	
 	public:
 		bool colide(PhysicObject* obj);
 		void collect(bool quiet = false);

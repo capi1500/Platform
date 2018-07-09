@@ -1,7 +1,8 @@
-time 0
+time 2
 Ground{
 	type static
 	shape box
+	name default
 	position 110 130
 	size 20 20
 	velocity 0 0
@@ -11,6 +12,17 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
+	position 50 130
+	size 20 20
+	velocity 0 0
+	angle 0
+	texture Textures/redBox.png
+}
+Ground{
+	type static
+	shape box
+	name default
 	position 210 130
 	size 20 20
 	velocity 0 0
@@ -20,6 +32,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 170 110
 	size 20 20
 	velocity 0 0
@@ -29,6 +42,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 50 150
 	size 150 10
 	velocity 0 0
@@ -38,6 +52,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 200 150
 	size 150 10
 	velocity 0 0
@@ -47,26 +62,17 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 350 150
 	size 150 10
 	velocity 0 0
 	angle 0
 	texture Textures/ground.png
 }
-Collectible{
-	type kinematic
-	shape box
-	position 175 95
-	size 10 10
-	velocity 0 0
-	angle 0
-	sound Audio/laser.ogg
-	texture Textures/yellowBox.png
-	collected false
-}
 Ground{
 	type static
 	shape box
+	name default
 	position 500 130
 	size 20 20
 	velocity 0 0
@@ -76,6 +82,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 520 130
 	size 20 20
 	velocity 0 0
@@ -85,6 +92,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 540 130
 	size 20 20
 	velocity 0 0
@@ -94,6 +102,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 560 130
 	size 20 20
 	velocity 0 0
@@ -103,6 +112,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 580 130
 	size 20 20
 	velocity 0 0
@@ -112,6 +122,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 600 130
 	size 20 20
 	velocity 0 0
@@ -121,6 +132,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 620 130
 	size 20 20
 	velocity 0 0
@@ -130,6 +142,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 640 130
 	size 20 20
 	velocity 0 0
@@ -139,6 +152,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 660 130
 	size 20 20
 	velocity 0 0
@@ -148,6 +162,7 @@ Ground{
 Ground{
 	type static
 	shape box
+	name default
 	position 680 130
 	size 20 20
 	velocity 0 0
@@ -159,57 +174,114 @@ Player{
 	density 1
 	friction 0
 	shape circle
-	position 325.371 98.6773
+	name Player
+	position 319.945 130.915
 	size 19 19
-	velocity -100 -5.38538
+	velocity 0 0
 	angle 0
 	sound Audio/jump.ogg
 	texture Textures/blueBox.png
 	EQ{
+		Money 100
 		Point 0
 	}
 }
-Object{
-	type dynamic
-	density 1
-	friction 5
-	shape box
-	position 229.838 109.6
+NPC{
+	type static
+	shape circle
+	name Antoni
+	position 300.5 130.5
 	size 20 20
 	velocity 0 0
-	angle 89.9996
-	texture Textures/redBox.png
+	angle 0
+	texture Textures/blueBox.png
+	talks{
+		after_quest1 Ohh thank you for help;
+		after_quest2 I will remember your deed;
+		bye goodbye;
+		hello hello;
+		quest1 Can you collect 5 carrots;
+		quest2 so I can make carrot brew;
+		quest3 I'll reward you with 100 gold coins;
+		quest_finished1 Very well, now I'm going to prepere my meal;
+		quest_finished2 Oh and here are your coins;
+		quest_in_progress1 Nah, you don't have enough;
+		quest_in_progress2 Bring me 5 carrots;
+	}
+	playerNearby true
+	playerMovedAway false
+	questStarted true
+	questDone true
+	afterQuest true
+	rewardGiven true
+	nowTalking nothing
+	ammount 5
+	target Point
+	rewardAmmount 100
+	reward Money
 }
-Object{
-	type dynamic
-	density 1
-	friction 5
+Collectible{
+	type kinematic
 	shape box
-	position 236.786 129.8
-	size 20 20
+	name Point
+	position 350 85
+	size 10 10
 	velocity 0 0
-	angle 6.75523e-05
-	texture Textures/redBox.png
+	angle 0
+	sound Audio/laser.ogg
+	texture Textures/yellowBox.png
+	collected true
+	ammount 1
 }
-Object{
-	type dynamic
-	density 1
-	friction 5
+Collectible{
+	type kinematic
 	shape box
-	position 313.688 129.8
-	size 20 20
+	name Point
+	position 290 95
+	size 10 10
 	velocity 0 0
-	angle 89.9999
-	texture Textures/redBox.png
+	angle 0
+	sound Audio/laser.ogg
+	texture Textures/yellowBox.png
+	collected true
+	ammount 1
 }
-Object{
-	type dynamic
-	density 1
-	friction 5
+Collectible{
+	type kinematic
 	shape box
-	position 265.364 129.8
-	size 20 20
+	name Point
+	position 175 95
+	size 10 10
 	velocity 0 0
-	angle 0.00157031
-	texture Textures/redBox.png
+	angle 0
+	sound Audio/laser.ogg
+	texture Textures/yellowBox.png
+	collected true
+	ammount 1
+}
+Collectible{
+	type kinematic
+	shape box
+	name Point
+	position 450 95
+	size 10 10
+	velocity 0 0
+	angle 0
+	sound Audio/laser.ogg
+	texture Textures/yellowBox.png
+	collected true
+	ammount 1
+}
+Collectible{
+	type kinematic
+	shape box
+	name Point
+	position 600 95
+	size 10 10
+	velocity 0 0
+	angle 0
+	sound Audio/laser.ogg
+	texture Textures/yellowBox.png
+	collected true
+	ammount 1
 }

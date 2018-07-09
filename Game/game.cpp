@@ -45,8 +45,8 @@ void Game::play(){
 	for(auto i : object){
 		i->pass(elapsedTime);
 		if(i->getObjectType() == ObjectType::Player){
-			pointCounter.setPoints(dynamic_cast<Player*>(i)->getCollectible("Point"));
-			pointCounter.setCentre(i->getCentre().x - window.getSize().x / 2 + 30, i->getCentre().y - window.getSize().y / 2 + 30);
+			pointCounter.setPoints(dynamic_cast<Player*>(i)->getCollectible("Money"));
+			pointCounter.setCentre(i->getCentre().x - window.getSize().x / 2 + alphabet.getWidth() * lettersScaling * pointCounter.getScale().x * (pointCounter.getPoints() == 0 ? 1 : static_cast<int>(1 + log10(pointCounter.getPoints()))) / 2, i->getCentre().y - window.getSize().y / 2 + 30);
 			view.setCenter(i->getCentre());
 			window.setView(view);
 		}
@@ -189,16 +189,16 @@ void Game::exitButtonClicked(){
 Game::Game() : world(b2Vec2(0.0f, 12.f)),
 		resolution(screenSizeX, screenSizeY),
 		settings(0, 0, ANTIALIASING, versionMajor, versionMinor),
-		window(sf::VideoMode(resolution.x, resolution.y), "Platform", sf::Style::Default, settings),
+		window(sf::VideoMode(resolution.x, resolution.y), "Platform", sf::Style::Fullscreen, settings),
 		state(GameState::MainMenu),
-		loader(window, world, object, elapsedTime),
+		loader(window, world, object, elapsedTime, alphabet),
 		pointCounter(window, "", sf::Vector2f(10, 10), alphabet){
 	menu.push_back(Menu(window, "", "pause menu"));
 	getMenu("pause menu")->addObject(new Button(&forwarderResumeButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Resume"));
+	getMenu("pause menu")->addObject(new Button(&forwarderPlayButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Restart"));
 	getMenu("pause menu")->addObject(new Button(&forwarderMainMenuButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Main menu"));
 	getMenu("pause menu")->addObject(new Button(&forwarderExitButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Exit game"));
 	menu.push_back(Menu(window, "", "main menu"));
 	getMenu("main menu")->addObject(new Button(&forwarderPlayButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Play"));
 	getMenu("main menu")->addObject(new Button(&forwarderExitButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Exit game"));
-	pointCounter.reset();
 }

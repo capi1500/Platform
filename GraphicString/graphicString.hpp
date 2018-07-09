@@ -33,7 +33,7 @@ class GraphicString : public Object{
 		
 		void draw();
 		
-		GraphicString(sf::RenderWindow& window, Alphabet& alphabet, sf::Vector2f position, std::string text, std::string texturePath, std::string name = "default");
+		GraphicString(sf::RenderWindow& window, Alphabet& alphabet, sf::Vector2f position = sf::Vector2f(0, 0), std::string text = "", std::string texturePath = "", std::string name = "default");
 };
 
 #endif //ONEWEEKCHALLANGE_GRAPHICSTRING_HPP
