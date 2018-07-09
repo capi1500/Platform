@@ -13,3 +13,10 @@ Probably there will be no updates in future but if you have any idea how to impr
 # Play game
 
 ./Platform
+
+# Key bindings
+
+A - move left
+D - move right
+SPACE - jump
+TAB - talk with NPCs
