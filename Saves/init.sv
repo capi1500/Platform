@@ -106,6 +106,7 @@ Portal{
     shape circle
     texture Textures/lightBlueBox.png
     target Saves/init1.sv
+    sound Audio/BonusCube.ogg
 }
 Player{
     position 125 132
@@ -116,6 +117,7 @@ Player{
     name Player
     texture Textures/blueBox.png
     sound Audio/jump.ogg
+    sound Audio/RPG-SFX/stones_01.ogg
 }
 NPC{
     position 300 130
@@ -124,22 +126,23 @@ NPC{
     name Antoni
     texture Textures/blueBox.png
     talks{
-        hello hello;
-        quest1 Can you collect 5 carrots;
-        quest2 so I can make carrot brew;
-        quest3 I'll reward you with 100 gold coins;
-        bye goodbye;
-        quest_in_progress1 Nah, you don't have enough;
-        quest_in_progress2 Bring me 5 carrots;
-        quest_finished1 Very well, now I'm going to prepere my meal;
-        quest_finished2 Oh and here are your coins;
-        after_quest1 Ohh thank you for help;
-        after_quest2 I will remember your deed;
+        hello Hello.;
+        quest1 Can you collect 5 carrots.;
+        quest2 so I can make carrot brew.;
+        quest3 I'll reward you with 100 gold coins.;
+        bye Goodbye.;
+        quest_in_progress1 Nah, you don't have enough.;
+        quest_in_progress2 Bring me 5 carrots.;
+        quest_finished1 Very well, now I'm going to prepere my meal.;
+        quest_finished2 and here are your coins.;
+        after_quest1 Thank you very much for help.;
+        after_quest2 I will remember your deed.;
     }
     target Point
     ammount 5
     reward Money
     rewardAmmount 100
+    sound Audio/RPG-SFX/item_misc_02.ogg
 }
 Collectible{
     position 350 85
@@ -148,7 +151,7 @@ Collectible{
     type kinematic
     name Point
     texture Textures/yellowBox.png
-    sound Audio/laser.ogg
+    sound Audio/RPG-SFX/item_coins_04.ogg
 }
 Collectible{
     position 290 95
@@ -157,7 +160,7 @@ Collectible{
     type kinematic
     name Point
     texture Textures/yellowBox.png
-    sound Audio/laser.ogg
+    sound Audio/RPG-SFX/item_coins_04.ogg
 }
 Collectible{
     position 175 95
@@ -166,7 +169,7 @@ Collectible{
     type kinematic
     name Point
     texture Textures/yellowBox.png
-    sound Audio/laser.ogg
+    sound Audio/RPG-SFX/item_coins_04.ogg
 }
 Collectible{
     position 450 95
@@ -175,7 +178,7 @@ Collectible{
     type kinematic
     name Point
     texture Textures/yellowBox.png
-    sound Audio/laser.ogg
+    sound Audio/RPG-SFX/item_coins_04.ogg
 }
 Collectible{
     position 600 95
@@ -184,5 +187,5 @@ Collectible{
     type kinematic
     name Point
     texture Textures/yellowBox.png
-    sound Audio/laser.ogg
+    sound Audio/RPG-SFX/item_coins_04.ogg
 }

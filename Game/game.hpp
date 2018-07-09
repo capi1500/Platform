@@ -27,6 +27,7 @@ class Game{
 		sf::Vector2f resolution;
 		GameState state;
 		
+		sf::Music music;
 		Loader loader;
 		Alphabet alphabet;
 		sf::RenderWindow window;

@@ -11,6 +11,7 @@ class Button : public Label{
 	protected:
 		void* context;
 		void (*onClick)(void*);
+		bool played;
 	public:
 		void handleEvent(sf::Event event);
 		void handleEvent();

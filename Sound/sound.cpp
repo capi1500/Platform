@@ -21,6 +21,10 @@ void Sound::setLoop(bool loop){
 	sound.setLoop(loop);
 }
 
+bool Sound::isPlaying(){
+	return sound.getStatus() == sf::SoundSource::Playing;
+}
+
 Sound::Sound(std::string path = ""){
 	if(not buffer.loadFromFile(path)){
 		throw "error loading sound: " + path + " may not exist or use unsuported format";

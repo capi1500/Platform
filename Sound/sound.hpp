@@ -16,6 +16,7 @@ class Sound{
 		void pause();
 		void setVolume(float volume);
 		void setLoop(bool loop);
+		bool isPlaying();
 		
 		Sound(std::string path);
 };

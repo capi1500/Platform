@@ -28,6 +28,9 @@ ObjectPassResult Player::pass(sf::Time elapsedTime){
 			}
 		}
 	}
+	if(not onGround()){
+		pauseSound("Audio/RPG-SFX/stones_01.ogg");
+	}
 	return ObjectPassResult::OK;
 }
 
@@ -39,9 +42,17 @@ void Player::handleEvent(){
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
 		addVelocity(sf::Vector2f(1, 0));
+		sounds[soundIDs["Audio/RPG-SFX/stones_01.ogg"]].setVolume(100);
+		if(not sounds[soundIDs["Audio/RPG-SFX/stones_01.ogg"]].isPlaying()){
+			playSound("Audio/RPG-SFX/stones_01.ogg");
+		}
 	}
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
 		addVelocity(sf::Vector2f(-1, 0));
+		sounds[soundIDs["Audio/RPG-SFX/stones_01.ogg"]].setVolume(100);
+		if(not sounds[soundIDs["Audio/RPG-SFX/stones_01.ogg"]].isPlaying()){
+			playSound("Audio/RPG-SFX/stones_01.ogg");
+		}
 	}
 }
 

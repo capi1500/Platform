@@ -17,6 +17,7 @@ ObjectPassResult Portal::pass(sf::Time elapsedTime){
 	for(auto* i : object){
 		if(i->getObjectType() == ObjectType::Player){
 			if(getGlobalBounds().intersects(i->getGlobalBounds())){
+				playSound("Audio/BonusCube.ogg");
 				return ObjectPassResult::NewLevel;
 			}
 		}

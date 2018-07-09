@@ -10,7 +10,7 @@ ObjectPassResult NPC::pass(sf::Time elapsedTime){
 	Entity::pass(elapsedTime);
 	for(auto i : object){
 		if(i->getObjectType() == ObjectType::Player){
-			if(50 >= sqrt((getCentre().x - i->getCentre().x) * (getCentre().x - i->getCentre().x) + (getCentre().y - i->getCentre().y) * (getCentre().y - i->getCentre().y))){
+			if(25 >= sqrt((getCentre().x - i->getCentre().x) * (getCentre().x - i->getCentre().x) + (getCentre().y - i->getCentre().y) * (getCentre().y - i->getCentre().y))){
 				playerNearby = true;
 			}
 			else{
@@ -24,6 +24,7 @@ ObjectPassResult NPC::pass(sf::Time elapsedTime){
 				dynamic_cast<Player*>(i)->addCollectible(reward, rewardAmmount);
 				dynamic_cast<Player*>(i)->addCollectible(questTarget, -ammount);
 				rewardGiven = true;
+				playSound("Audio/RPG-SFX/item_misc_02.ogg");
 			}
 			if(dynamic_cast<Player*>(i)->getCollectible(questTarget) >= ammount){
 				questDone = true;

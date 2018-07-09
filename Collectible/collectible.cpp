@@ -24,7 +24,7 @@ void Collectible::draw(){
 void Collectible::collect(bool quiet){
 	collected = true;
 	if(not quiet){
-		playSound("Audio/laser.ogg");
+		playSound("Audio/RPG-SFX/item_coins_04.ogg");
 	}
 }
 
