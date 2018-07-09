@@ -216,7 +216,7 @@ Game::Game() : world(b2Vec2(0.0f, 12.f)),
 	menu.push_back(Menu(window, "", "main menu"));
 	getMenu("main menu")->addObject(new Button(&forwarderPlayButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Play"));
 	getMenu("main menu")->addObject(new Button(&forwarderExitButton, this, window, "", sf::Vector2f(0, 0), alphabet, "Exit game"));
-	music.openFromFile("Audio/The\ Traveller.wav");
+	music.openFromFile("Audio/The\ Traveller.ogg");
 	music.setLoop(true);
 	music.setVolume(30);
 	music.play();
