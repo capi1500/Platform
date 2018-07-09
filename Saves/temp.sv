@@ -1,4 +1,4 @@
-time 2
+time 1
 Ground{
 	type static
 	shape box
@@ -175,14 +175,14 @@ Player{
 	friction 0
 	shape circle
 	name Player
-	position 319.945 130.915
+	position 130.05 130.95
 	size 19 19
-	velocity 0 0
+	velocity 0 -5.48743e-09
 	angle 0
 	sound Audio/jump.ogg
 	texture Textures/blueBox.png
 	EQ{
-		Money 100
+		Money 0
 		Point 0
 	}
 }
@@ -208,12 +208,12 @@ NPC{
 		quest_in_progress1 Nah, you don't have enough;
 		quest_in_progress2 Bring me 5 carrots;
 	}
-	playerNearby true
-	playerMovedAway false
-	questStarted true
-	questDone true
-	afterQuest true
-	rewardGiven true
+	playerNearby false
+	playerMovedAway true
+	questStarted false
+	questDone false
+	afterQuest false
+	rewardGiven false
 	nowTalking nothing
 	ammount 5
 	target Point
@@ -230,7 +230,7 @@ Collectible{
 	angle 0
 	sound Audio/laser.ogg
 	texture Textures/yellowBox.png
-	collected true
+	collected false
 	ammount 1
 }
 Collectible{
@@ -243,7 +243,7 @@ Collectible{
 	angle 0
 	sound Audio/laser.ogg
 	texture Textures/yellowBox.png
-	collected true
+	collected false
 	ammount 1
 }
 Collectible{
@@ -256,7 +256,7 @@ Collectible{
 	angle 0
 	sound Audio/laser.ogg
 	texture Textures/yellowBox.png
-	collected true
+	collected false
 	ammount 1
 }
 Collectible{
@@ -269,7 +269,7 @@ Collectible{
 	angle 0
 	sound Audio/laser.ogg
 	texture Textures/yellowBox.png
-	collected true
+	collected false
 	ammount 1
 }
 Collectible{
@@ -282,6 +282,6 @@ Collectible{
 	angle 0
 	sound Audio/laser.ogg
 	texture Textures/yellowBox.png
-	collected true
+	collected false
 	ammount 1
 }
