@@ -2,6 +2,7 @@
 // Created by capi1500 on 08/07/18.
 //
 
+#include <config.h>
 #include "label.hpp"
 
 void Label::draw(){
@@ -15,9 +16,9 @@ void Label::draw(){
 
 sf::FloatRect Label::getTextRect(){
 	sf::FloatRect out;
-	out.height = properties.lines * alphabet.getHeight();
+	out.height = properties.lines * alphabet.getHeight() * lettersScaling;
 	for(auto i : properties.length){
-		out.width = std::max(static_cast<unsigned>(out.width), i * alphabet.getWidth());
+		out.width = std::max(static_cast<unsigned>(out.width), i * alphabet.getWidth()) * lettersScaling;
 	}
 	out.left = getCentre().x - out.width / 2;
 	out.top = getCentre().y - out.height / 2;
