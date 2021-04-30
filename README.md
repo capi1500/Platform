@@ -1,6 +1,5 @@
 # Platform
-Simple platformer game.
-Probably there will be no updates in future but if you have any idea how to improve it or add more contet, write to me kacper.chetkowski@gmail.com or create Pull request with what you added/changed.
+Simple platformer game working under Linux. The project is archived.
 
 # Install
 
